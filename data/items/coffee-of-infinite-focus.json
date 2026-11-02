@@ -1,0 +1,9 @@
+{
+  "name": "Coffee of Infinite Focus",
+  "description": "A magical developer's brew that never goes cold. Its aroma keeps even the sleepiest coder focused through the longest debugging sessions.",
+  "rarity": "rare",
+  "stat_bonus": {
+    "dex": 5
+  },
+  "effect": "Prevents the Night Owl debuff and doubles the streak multiplier"
+}
