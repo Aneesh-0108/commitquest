@@ -1,0 +1,21 @@
+{
+  "name": "Frontend Knight",
+  "description": "Guardians of the user interface. They wield HTML, CSS, and JavaScript to craft beautiful, responsive, and interactive experiences.",
+  "primary_stat": "str",
+  "stat_bonus": {
+    "str": 5,
+    "int": 2,
+    "dex": 2,
+    "con": 1
+  },
+  "file_patterns": [
+    ".html",
+    ".css",
+    ".scss",
+    ".jsx",
+    ".tsx",
+    ".vue",
+    ".svelte"
+  ],
+  "passive": "Pixel Perfect — turns complex layouts into polished interfaces with precision and style"
+}
