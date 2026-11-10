@@ -42,12 +42,15 @@ function normalizeEvent(event) {
             if (event.payload?.action === 'opened') {
                 return createRecord(event.id, 'pull_request_opened', occurredAt, occurredOn, repository, 1, 'author')
             }
-            if (event.payload?.action === 'closed' && event.payload?.merged === true) {
+            if (
+                event.payload?.action === 'merged' ||
+                (event.payload?.action === 'closed' && event.payload?.merged === true)
+            ) {
                 return createRecord(event.id, 'pull_request_merged', occurredAt, occurredOn, repository, 1, 'merger')
             }
             return null
         case 'PullRequestReviewEvent':
-            if (event.payload?.action === 'submitted') {
+            if (event.payload?.action === 'created' || event.payload?.action === 'submitted') {
                 return createRecord(event.id, 'pull_request_reviewed', occurredAt, occurredOn, repository, 1, 'reviewer')
             }
             return null

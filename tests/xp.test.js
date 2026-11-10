@@ -141,6 +141,58 @@ test('normalizes supported semantic events and ignores unsupported actions', () 
     ])
 })
 
+test('normalizes GitHub REST pull request and review actions', () => {
+    const date = new Date('2026-11-06T12:00:00Z')
+    const activity = normalizeEvents([
+        {
+            id: 'rest-pr-merged',
+            type: 'PullRequestEvent',
+            repo: 'octo/quest',
+            createdAt: date,
+            payload: {
+                action: 'merged',
+                merged: true,
+                pull_request: { merged: true }
+            }
+        },
+        {
+            id: 'rest-review-created',
+            type: 'PullRequestReviewEvent',
+            repo: 'octo/quest',
+            createdAt: date,
+            payload: {
+                action: 'created',
+                review: { state: 'approved' }
+            }
+        },
+        {
+            id: 'rest-review-dismissed',
+            type: 'PullRequestReviewEvent',
+            repo: 'octo/quest',
+            createdAt: date,
+            payload: {
+                action: 'dismissed',
+                review: { state: 'dismissed' }
+            }
+        },
+        {
+            id: 'rest-review-updated',
+            type: 'PullRequestReviewEvent',
+            repo: 'octo/quest',
+            createdAt: date,
+            payload: {
+                action: 'updated',
+                review: { state: 'approved' }
+            }
+        }
+    ])
+
+    assert.deepEqual(activity.records.map(record => record.kind), [
+        'pull_request_merged',
+        'pull_request_reviewed'
+    ])
+})
+
 test('deduplicates repeated event IDs but keeps distinct pushes on one UTC day', () => {
     const firstPush = {
         id: 'push-1',
